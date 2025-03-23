@@ -144,9 +144,6 @@ MIT License - feel free to use this project for your own purposes.
 ## 🤝 Contributing
 Contributions, issues, and feature requests are welcome!
 
-## 📞 Support
-For support, email support@cimsapp.com or join our Slack channel.
-
 ## 🙏 Acknowledgments
 - Expo team for the amazing mobile development platform
 - Material-UI team for the beautiful components
