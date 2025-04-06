@@ -33,6 +33,11 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+userSchema.methods.updatePushToken = async function(token) {
+  this.expoPushToken = token;
+  await this.save();
+};
+
 const User = mongoose.model("User", userSchema);
 
 export default User;
