@@ -115,3 +115,29 @@ export const updateNotificationToken = async (req, res) => {
     res.status(500).json({ message: 'Error updating notification token' });
   }
 };
+
+export const updatePushToken = async (req, res) => {
+  try {
+    const { expoPushToken } = req.body;
+    
+    console.log('Updating push token for user:', req.user.id); // Debug log
+    console.log('New token:', expoPushToken); // Debug log
+
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.id,
+      { expoPushToken },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      console.log('User not found:', req.user.id); // Debug log
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    console.log('Token updated successfully:', updatedUser.expoPushToken); // Debug log
+    res.status(200).json({ message: 'Push token updated successfully' });
+  } catch (error) {
+    console.error('Error updating push token:', error);
+    res.status(500).json({ message: 'Error updating push token' });
+  }
+};

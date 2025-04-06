@@ -4,7 +4,7 @@ import Issue from "../models/issue.model.js";
 import { generateToken } from "../libs/utils.js";
 import { getIO } from '../services/socketService.js';  // Add this import
 import User from "../models/user.model.js";
-import { sendNotification } from '../services/notificationService.js';
+import { sendNotification, NOTIFICATION_TYPES, createNotificationMessage } from '../services/notificationService.js';
 
 const validateStatusProgression = (currentStatus, newStatus) => {
   const validProgressions = {
@@ -15,6 +15,23 @@ const validateStatusProgression = (currentStatus, newStatus) => {
   };
 
   return validProgressions[currentStatus]?.includes(newStatus) || false;
+};
+
+const validateStatusTransition = (currentStatus, newStatus) => {
+  const validTransitions = {
+    'pending_verification': ['verified', 'rejected'],
+    'verified': ['in_progress'],
+    'in_progress': ['resolved'],
+    'resolved': [], // No further transitions allowed
+    'rejected': []  // No further transitions allowed
+  };
+
+  // If current status is a final state, don't allow transitions
+  if (currentStatus === 'resolved' || currentStatus === 'rejected') {
+    return false;
+  }
+
+  return validTransitions[currentStatus]?.includes(newStatus);
 };
 
 export const adminLogin = async (req, res) => {
@@ -91,27 +108,23 @@ export const updateIssueStatus = async (req, res) => {
     const { id } = req.params;
     const { status, notes } = req.body;
 
-    const issue = await Issue.findById(id);
+    const issue = await Issue.findById(id)
+      .populate('user', 'fullName email expoPushToken');
     
     if (!issue) {
       return res.status(404).json({ message: 'Issue not found' });
     }
 
-    if (!issue.isVerified) {
+    // Check if status transition is valid
+    if (!validateStatusTransition(issue.status, status)) {
       return res.status(400).json({ 
-        message: 'Cannot update status of unverified issue' 
-      });
-    }
-
-    if (!validateStatusProgression(issue.status, status)) {
-      return res.status(400).json({ 
-        message: 'Invalid status progression' 
+        message: `Cannot update status from ${issue.status} to ${status}` 
       });
     }
 
     // Add the update to updates array
     issue.updates.push({
-      message: notes,
+      message: notes || `Status updated to ${status}`,
       status: status,
       updatedBy: req.user.id,
       date: new Date()
@@ -120,20 +133,25 @@ export const updateIssueStatus = async (req, res) => {
     // Update the status
     issue.status = status;
     const updatedIssue = await issue.save();
-    await updatedIssue.populate('user', 'fullName email expoPushToken');
     await updatedIssue.populate('updates.updatedBy', 'name');
 
     // Send notification to user
     if (updatedIssue.user.expoPushToken) {
-      await sendNotification(
-        updatedIssue.user.expoPushToken,
-        'Issue Update',
-        `Your issue "${updatedIssue.title}" status has been updated to ${status}`,
-        {
-          issueId: updatedIssue._id,
-          status: updatedIssue.status
-        }
+      const notificationMessage = createNotificationMessage(
+        NOTIFICATION_TYPES.STATUS_UPDATE,
+        updatedIssue
       );
+      
+      console.log('Sending status notification to:', updatedIssue.user.expoPushToken);
+      
+      const result = await sendNotification(
+        updatedIssue.user.expoPushToken,
+        notificationMessage.title,
+        notificationMessage.body,
+        notificationMessage.data
+      );
+      
+      console.log('Notification result:', result);
     }
 
     const io = getIO();
@@ -154,7 +172,8 @@ export const verifyIssue = async (req, res) => {
     const { id } = req.params;
     const { isVerified, verificationNotes } = req.body;
 
-    const issue = await Issue.findById(id);
+    const issue = await Issue.findById(id)
+      .populate('user', 'fullName email expoPushToken'); // Make sure we populate expoPushToken
     
     if (!issue) {
       return res.status(404).json({ message: 'Issue not found' });
@@ -173,12 +192,36 @@ export const verifyIssue = async (req, res) => {
     });
 
     const updatedIssue = await issue.save();
-    await updatedIssue.populate('user', 'fullName email');
     await updatedIssue.populate('updates.updatedBy', 'name');
 
-    const io = getIO();  // This will now work with the import
+    // Send notification to user based on verification status
+    if (updatedIssue.user.expoPushToken) {
+      const notificationType = isVerified ? 
+        NOTIFICATION_TYPES.ISSUE_VERIFIED : 
+        NOTIFICATION_TYPES.ISSUE_REJECTED;
+      
+      const notificationMessage = createNotificationMessage(
+        notificationType,
+        updatedIssue
+      );
+
+      console.log('Sending verification notification:', {
+        token: updatedIssue.user.expoPushToken,
+        type: notificationType
+      });
+
+      await sendNotification(
+        updatedIssue.user.expoPushToken,
+        notificationMessage.title,
+        notificationMessage.body,
+        notificationMessage.data
+      );
+    }
+
+    // Emit socket event
+    const io = getIO();
     io.emit('issueUpdate', {
-      type: 'VERIFICATION_UPDATE',
+      type: isVerified ? 'ISSUE_VERIFIED' : 'ISSUE_REJECTED',
       issue: updatedIssue
     });
 
