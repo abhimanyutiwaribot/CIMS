@@ -4,13 +4,14 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useTheme } from '../context/ThemeContext';
 import HomeScreen from "../screens/HomeScreen";
-import ReportIssueScreen from "../screens/ReportIssueScreen";
+// import ReportIssueScreen from "../screens/ReportIssueScreen";
 import MyReportsScreen from "../screens/MyReportsScreen";
 import ProfileScreen from "../screens/ProfileScreen.js";
-import IssueDetailsScreen from "../screens/IssueDetailsScreen";
+import IssueDetailsScreen from "../screens/IssuesScreen";
 import AuthStack from "./AuthStack.js";
 import { Ionicons } from "@expo/vector-icons";
 import EditProfileScreen from "../screens/EditProfileScreen";
+import ReportIssueStack from './ReportIssueStack';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -47,7 +48,15 @@ const BottomTabs = ({ setIsLoggedIn }) => {
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Report" component={ReportIssueScreen} />
+      <Tab.Screen 
+        name="Report" 
+        component={ReportIssueStack}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="add-circle" size={size} color={color} />
+          )
+        }}
+      />
       <Tab.Screen name="My Reports" component={MyReportsScreen} />
       <Tab.Screen name="Profile">
         {(props) => <ProfileScreen {...props} setIsLoggedIn={setIsLoggedIn} />}
