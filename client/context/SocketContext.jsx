@@ -7,7 +7,7 @@ export function SocketProvider({ children }) {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const socketInstance = io('http://192.168.0.188:5000', {
+    const socketInstance = io('http://192.168.0.194:5000', {
       transports: ['websocket'],
       reconnection: true,
       timeout: 10000,
