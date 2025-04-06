@@ -1,7 +1,7 @@
 # Reparo - Community Issue Management System
 
 <p align="center">
-  <img src="./client/assets/icon.png" width="100" alt="Reparo Logo"/>
+  <img src="./client/assets/icon2.png" width="100" alt="Reparo Logo"/>
 </p>
 
 Reparo is a comprehensive mobile and web application designed to help communities report and manage local infrastructure issues efficiently.
