@@ -46,9 +46,17 @@ export default function SignUpPage() {
         alignItems: 'center',
       }}>
         <Paper elevation={3} sx={{ p: 4, width: '100%' }}>
-          <Typography component="h1" variant="h5" align="center" gutterBottom>
-            Create Admin Account
-          </Typography>
+        <img 
+              src="/assets/icon.png" 
+              alt="Reparo" 
+              style={{ 
+                width: 150, 
+                height: 150,
+                objectFit: 'contain',
+                marginLeft: 90
+              }} 
+            />
+
           {error && (
             <Typography color="error" align="center" sx={{ mb: 2 }}>
               {error}
