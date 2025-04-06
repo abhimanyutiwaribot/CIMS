@@ -9,6 +9,7 @@ Reparo is a comprehensive mobile and web application designed to help communitie
 ## 🌟 Features
 
 ### Mobile App
+
 - **Issue Reporting**: Easy submission of community issues with photos and location
 - **Real-time Updates**: Live status updates on reported issues
 - **Interactive Maps**: View reported issues in your vicinity
@@ -17,6 +18,7 @@ Reparo is a comprehensive mobile and web application designed to help communitie
 - **Dark/Light Theme**: Comfortable viewing in any lighting condition
 
 ### Admin Dashboard
+
 - **Issue Management**: Verify, update, and track reported issues
 - **User Management**: Monitor user activity and engagement
 - **Analytics**: Track resolution times and community engagement
@@ -34,7 +36,7 @@ Reparo is a comprehensive mobile and web application designed to help communitie
 
 ## 📱 Screenshots
 
-[Add screenshots here]
+will add when completed
 
 ## 🚀 Getting Started
 
@@ -48,8 +50,8 @@ Reparo is a comprehensive mobile and web application designed to help communitie
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/reparo.git
-cd reparo
+git clone https://github.com/abhimanyutiwaribot/Reparo.git
+
 ```
 
 2. **Set up environment variables**
@@ -96,3 +98,30 @@ npm run dev
 ```
 
 ## 📝 Project Structure
+```bash
+reparo/
+├── client/              # Mobile app (React Native)
+├── admin/              # Admin dashboard (React)
+├── server/             # Backend API (Node.js)
+```
+
+## 🤝 Contributing
+
+**Fork the repository**
+
+-- **Create your feature branch (git checkout -b feature/AmazingFeature)**
+
+-- **Commit your changes (git commit -m 'Add some AmazingFeature')**
+
+-- **Push to the branch (git push origin feature/AmazingFeature)**
+
+-- **Open a Pull Request**
+
+## 📄 License
+
+**This project is licensed under the MIT License - see the LICENSE file for details.**
+
+## 🙏 Acknowledgments
+
+**All contributors who have helped this project evolve**
+**Community members who provided valuable feedback**
