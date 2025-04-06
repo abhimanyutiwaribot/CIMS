@@ -32,6 +32,9 @@ app.use(
   })
 );
 
+// Make sure the admin routes are properly registered
+app.use("/api/admin", adminRoutes);
+
 // Initialize Socket.IO before routes
 const io = initSocket(server);
 
@@ -44,7 +47,6 @@ io.on('connection', (socket) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/issues",issueRoutes)
-app.use("/api/admin", adminRoutes);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
