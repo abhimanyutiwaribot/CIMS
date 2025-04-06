@@ -30,21 +30,20 @@ export const getCurrentLocation = async () => {
     }
 
     const location = await Location.getCurrentPositionAsync({
-      accuracy: Location.Accuracy.High,
-      timeInterval: 5000,
-      distanceInterval: 0,
-      mayShowUserSettingsDialog: true
+      accuracy: Location.Accuracy.Balanced, // Changed from High to Balanced
+      timeout: 15000, // 15 second timeout
     });
+
+    if (!location) {
+      throw new Error('Could not get location');
+    }
 
     return {
       latitude: location.coords.latitude,
-      longitude: location.coords.longitude
+      longitude: location.coords.longitude,
     };
   } catch (error) {
-    if (error.message.includes('Location services are disabled')) {
-      throw new Error('Please enable location services in your device settings to use this feature.');
-    }
-    console.error('Error getting location:', error);
-    throw error;
+    console.error('getCurrentLocation error:', error);
+    throw new Error('Failed to get current location');
   }
 };
