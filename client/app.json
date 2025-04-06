@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "citi-app",
-    "slug": "citi-app",
+    "name": "Reparo",
+    "slug": "reparo",
     "version": "1.0.0",
     "orientation": "portrait",
     "newArchEnabled": true,
@@ -14,10 +14,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.citiapp.cims"
+      "bundleIdentifier": "com.reparo.app"
     },
     "android": {
-      "package": "com.citiapp.cims",
+      "package": "com.reparo.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
@@ -25,11 +25,40 @@
       "permissions": [
         "ACCESS_FINE_LOCATION",
         "ACCESS_COARSE_LOCATION",
-        "CAMERA"
-      ]
+        "CAMERA",
+        "NOTIFICATIONS"
+      ],
+      "versionCode": 1,
+      "useNextNotificationsApi": true,
+      "notification": {
+        "icon": "./assets/notification-icon.png",
+        "color": "#3b82f6"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#ffffff"
+        }
+      ]
+    ],
+    "notification": {
+      "icon": "./assets/notification-icon.png",
+      "color": "#3b82f6",
+      "androidMode": "default",
+      "androidCollapsedTitle": "Reparo",
+      "iosDisplayInForeground": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "db3a5438-564d-414d-83bb-9635942f5603"
+      }
+    },
+    "owner": "abhiiii.tiwari"
   }
 }
