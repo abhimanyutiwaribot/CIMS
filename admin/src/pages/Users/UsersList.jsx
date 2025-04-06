@@ -13,15 +13,19 @@ import {
   Avatar,
   TextField,
   InputAdornment,
-  Chip
+  Chip,
+  Button
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import axios from 'axios';
+import { useSnackbar } from 'notistack';  // Make sure this is imported
 
 export default function UsersList() {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
+  const { enqueueSnackbar } = useSnackbar();  // Add this hook
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -40,6 +44,59 @@ export default function UsersList() {
 
     fetchUsers();
   }, []);
+
+  const checkUserToken = async (userId) => {
+    try {
+      const token = localStorage.getItem('adminToken');
+      const response = await axios.get(
+        `http://192.168.0.194:5000/api/admin/user-token/${userId}`,
+        { headers: { Authorization: `Bearer ${token}` }}
+      );
+      
+      if (!response.data.hasToken) {
+        enqueueSnackbar('User has no push token registered', { variant: 'warning' });
+        return false;
+      }
+      return true;
+    } catch (error) {
+      console.error('Error checking user token:', error);
+      return false;
+    }
+  };
+
+  const sendTestNotification = async (userId) => {
+    const hasToken = await checkUserToken(userId);
+    if (!hasToken) return;
+
+    try {
+      console.log('Sending test notification to user:', userId); // Debug log
+      
+      const token = localStorage.getItem('adminToken');
+      const response = await axios.post(
+        `http://192.168.0.194:5000/api/admin/test-notification/${userId}`,
+        {},
+        { 
+          headers: { 
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      
+      console.log('Notification response:', response.data);
+      enqueueSnackbar('Test notification sent!', { variant: 'success' });
+    } catch (error) {
+      console.error('Error details:', {
+        message: error.message,
+        response: error.response?.data
+      });
+      
+      enqueueSnackbar(
+        error.response?.data?.message || 'Failed to send test notification', 
+        { variant: 'error' }
+      );
+    }
+  };
 
   const filteredUsers = users.filter(user =>
     user.fullName.toLowerCase().includes(search.toLowerCase()) ||
@@ -79,6 +136,7 @@ export default function UsersList() {
                   <TableCell>Reports</TableCell>
                   <TableCell>Joined</TableCell>
                   <TableCell>Status</TableCell>
+                  <TableCell>Actions</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -104,6 +162,16 @@ export default function UsersList() {
                         color={user.isActive ? 'success' : 'default'}
                         size="small"
                       />
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        startIcon={<NotificationsIcon />}
+                        size="small"
+                        onClick={() => sendTestNotification(user._id)}
+                        variant="outlined"
+                      >
+                        Test Notification
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}
