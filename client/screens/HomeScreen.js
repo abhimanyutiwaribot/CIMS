@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTheme } from '../context/ThemeContext';
 
 
-const API_URL = "http://192.168.0.188:5000/api";
+const API_URL = "http://192.168.0.194:5000/api";
 
 export default function HomeScreen() {
   const navigation = useNavigation();

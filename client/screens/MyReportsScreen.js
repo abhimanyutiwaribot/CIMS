@@ -7,7 +7,7 @@ import { useTheme } from '../context/ThemeContext';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { io } from 'socket.io-client';
 
-const API_URL = "http://192.168.0.188:5000/api";
+const API_URL = "http://192.168.0.194:5000/api";
 
 export default function MyReportsScreen({ navigation }) {
   const { theme } = useTheme();
@@ -43,7 +43,7 @@ export default function MyReportsScreen({ navigation }) {
   }, [fetchReports]);
 
   useEffect(() => {
-    const socket = io('http://192.168.0.188:5000', {
+    const socket = io('http://192.168.0.194:5000', {
       transports: ['websocket'],
       reconnection: true,
       timeout: 10000,

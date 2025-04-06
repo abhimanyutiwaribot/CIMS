@@ -79,7 +79,7 @@ export default function EditProfileScreen({ route, navigation }) {
 
       const token = await AsyncStorage.getItem('userToken');
       const response = await axios.patch(
-        'http://192.168.0.188:5000/api/user/profile',
+        'http://192.168.0.194:5000/api/user/profile',
         {
           fullName,
           profilePic: imageUrl

@@ -22,7 +22,7 @@ export default function IssueDetailsScreen({ route, navigation }) {
     try {
       const token = await AsyncStorage.getItem('userToken');
       const response = await axios.get(
-        `http://192.168.0.188:5000/api/issues/${issue._id}`,
+        `http://192.168.0.194:5000/api/issues/${issue._id}`,
         {
           headers: { Authorization: `Bearer ${token}` }
         }
@@ -40,7 +40,7 @@ export default function IssueDetailsScreen({ route, navigation }) {
   };
 
   useEffect(() => {
-    const socket = io('http://192.168.0.188:5000', {
+    const socket = io('http://192.168.0.194:5000', {
       transports: ['websocket'],
       reconnection: true,
       timeout: 10000,

@@ -128,7 +128,7 @@ export default function SignupScreen({ navigation }) {
     }
 
     try {
-      const response = await axios.post('http://192.168.0.188:5000/api/auth/signup', {
+      const response = await axios.post('http://192.168.0.194:5000/api/auth/signup', {
         fullName,
         email,
         password,
@@ -170,7 +170,7 @@ export default function SignupScreen({ navigation }) {
       >
         <View style={styles.headerContainer}>
           <Text style={[styles.welcomeText, { color: theme.text }]}>Create Account</Text>
-          <Text style={[styles.subtitle, { color: theme.textSecondary }]}>Join CIMS to help our community</Text>
+          <Text style={[styles.subtitle, { color: theme.textSecondary }]}>Join Reparo to help our community</Text>
         </View>
 
         <TouchableOpacity style={styles.imagePickerContainer} onPress={pickImage}>

@@ -8,7 +8,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import CustomAlert from "../components/CustomAlert";
 
 // Replace with your actual backend URL
-const API_URL = "http://192.168.0.188:5000/api";
+const API_URL = "http://192.168.0.194:5000/api";
 
 export default function ProfileScreen({ setIsLoggedIn }) {
   const [user, setUser] = useState(null);

@@ -57,7 +57,7 @@ export default function LoginScreen({ setIsLoggedIn }) {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://192.168.0.188:5000/api/auth/login', {
+      const response = await axios.post('http://192.168.0.194:5000/api/auth/login', {
         email,
         password,
       });
@@ -107,7 +107,7 @@ export default function LoginScreen({ setIsLoggedIn }) {
       >
         <View style={styles.headerContainer}>
           <Text style={[styles.welcomeText, { color: theme.text }]}>Welcome Back!</Text>
-          <Text style={[styles.subtitle, { color: theme.textSecondary }]}>Sign in to continue to CIMS</Text>
+          <Text style={[styles.subtitle, { color: theme.textSecondary }]}>Sign in to continue to Reparo</Text>
         </View>
 
         <View style={styles.formContainer}>

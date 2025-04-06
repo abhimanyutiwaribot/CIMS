@@ -10,8 +10,8 @@ import { Ionicons } from '@expo/vector-icons';
 
 const slides = [
   {
-    id: '0',
-    title: 'Welcome to CIMS',
+    id: 1,
+    title: 'Welcome to Reparo',
     description: 'Your platform for community improvement and civic engagement',
     icon: 'shield-checkmark-outline',
     color: '#7C3AED'  // Purple
