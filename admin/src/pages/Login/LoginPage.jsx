@@ -36,11 +36,31 @@ export default function LoginPage() {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Paper elevation={3} sx={{ p: 4, width: '100%' }}>
-          <Typography component="h1" variant="h5" align="center" gutterBottom>
-            CIMS Admin Login
-          </Typography>
+      <Box sx={{ 
+        marginTop: 8, 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center' 
+      }}>
+        <Paper elevation={3} sx={{ p: 2, width: '100%' }}>
+          <Box sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            gap: 2,
+            mb: 2 
+          }}>
+            <img 
+              src="/assets/icon.png" 
+              alt="Reparo" 
+              style={{ 
+                width: 150, 
+                height: 150,
+                objectFit: 'contain'
+              }} 
+            />
+           
+          </Box>
           {error && (
             <Typography color="error" align="center" sx={{ mb: 2 }}>
               {error}
