@@ -34,9 +34,17 @@ export default function Sidebar() {
       }}
     >
       <Box sx={{ p: 3, display: 'flex', alignItems: 'center', gap: 2 }}>
-        <img src="/logo.png" alt="CIMS" style={{ width: 32, height: 32 }} />
+        <img 
+          src="/assets/reparo-logo.png" 
+          alt="Reparo" 
+          style={{ 
+            width: 32, 
+            height: 32,
+            objectFit: 'contain'
+          }} 
+        />
         <Typography variant="h6" color="primary.main" fontWeight="bold">
-          CIMS Admin
+          Reparo Admin
         </Typography>
       </Box>
 
