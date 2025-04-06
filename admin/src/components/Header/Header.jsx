@@ -26,20 +26,15 @@ export default function Header() {
       }}
     >
       <Toolbar sx={{ height: 70 }}>
-        <Typography 
-          variant="h5" 
-          component="div" 
-          sx={{ 
-            fontFamily: 'Gilroy, sans-serif',
-            fontWeight: 800,
-            color: 'primary.main',
-            letterSpacing: '0.5px',
-            flexGrow: 0,
-            marginRight: 3
-          }}
-        >
-          CIMS
-        </Typography>
+      <img 
+              src="/assets/icon.png" 
+              alt="Reparo" 
+              style={{ 
+                width: 115, 
+                height: 115,
+                objectFit: 'contain'
+              }} 
+            />
 
         <Box sx={{ flexGrow: 1 }} />
         
