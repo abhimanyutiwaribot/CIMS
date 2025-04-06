@@ -1,151 +1,98 @@
-# CIMS - Community Issue Management System
+# Reparo - Community Issue Management System
 
-CIMS is a comprehensive platform for community members to report and track civic issues in their area. The system consists of a mobile app for citizens and a web-based admin panel for authorities.
+<p align="center">
+  <img src="./client/assets/icon.png" width="100" alt="Reparo Logo"/>
+</p>
+
+Reparo is a comprehensive mobile and web application designed to help communities report and manage local infrastructure issues efficiently.
 
 ## 🌟 Features
 
 ### Mobile App
-- User authentication and profile management
-- Report issues with image uploads and location tracking
-- Real-time issue status updates
-- Push notifications for issue updates
-- Interactive map view of reported issues
-- Dark/Light theme support
-- Smooth onboarding experience
+- **Issue Reporting**: Easy submission of community issues with photos and location
+- **Real-time Updates**: Live status updates on reported issues
+- **Interactive Maps**: View reported issues in your vicinity
+- **Push Notifications**: Get instant updates on your reports
+- **Profile Management**: Track your contributions and manage personal information
+- **Dark/Light Theme**: Comfortable viewing in any lighting condition
 
-### Admin Panel
-- Secure admin authentication
-- Real-time issue monitoring
-- Issue verification and status management
-- User management system
-- Analytics dashboard
-- Status progression control
+### Admin Dashboard
+- **Issue Management**: Verify, update, and track reported issues
+- **User Management**: Monitor user activity and engagement
+- **Analytics**: Track resolution times and community engagement
+- **Real-time Updates**: Live issue tracking and status management
 
-## 🛠️ Technology Stack
+## 🛠️ Tech Stack
 
-### Mobile App (React Native + Expo)
-- React Native & Expo SDK
-- React Navigation
-- Expo Location & Image Picker
-- AsyncStorage for local storage
-- Axios for API calls
-- Socket.IO for real-time updates
+- **Mobile App**: React Native + Expo
+- **Admin Dashboard**: React.js
+- **Backend**: Node.js + Express
+- **Database**: MongoDB
+- **Real-time**: Socket.IO
+- **Storage**: Cloudinary
+- **Authentication**: JWT
 
-### Admin Panel (React + Material-UI)
-- React.js
-- Material-UI components
-- React Router
-- Socket.IO Client
-- Recharts for analytics
+## 📱 Screenshots
 
-### Backend (Node.js)
-- Express.js
-- MongoDB with Mongoose
-- Socket.IO
-- JWT Authentication
-- Cloudinary for image storage
-- Expo Server SDK for notifications
+[Add screenshots here]
 
-## 📱 Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js v16 or higher
+- Node.js 14+
 - MongoDB
 - Expo CLI
-- Git
+- npm/yarn
 
 ### Installation
 
-1. Clone the repository:
+1. **Clone the repository**
 ```bash
-git clone https://github.com/Avanish08/Citizen-Issue-Management-system.git
-cd cims-app
+git clone https://github.com/yourusername/reparo.git
+cd reparo
 ```
 
-2. Install server dependencies:
+2. **Set up environment variables**
 ```bash
+# Server (.env)
+MONGODB_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+CLOUDINARY_CLOUD_NAME=your_cloudinary_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+# Client (.env)
+API_URL=your_api_url
+```
+
+3. **Install dependencies**
+```bash
+# Server
 cd server
 npm install
-```
 
-3. Install admin panel dependencies:
-```bash
+# Client (Mobile App)
+cd ../client
+npm install
+
+# Admin Dashboard
 cd ../admin
 npm install
 ```
 
-4. Install mobile app dependencies:
+4. **Run the application**
 ```bash
-cd ../client
-npm install
-```
-
-5. Set up environment variables:
-   - Create `.env` in server directory
-   - Set up MongoDB connection string
-   - Configure Cloudinary credentials
-   - Set JWT secret
-
-### Running the Application
-
-1. Start the server:
-```bash
+# Server
 cd server
-node server.js
-```
+npm start
 
-2. Start the admin panel:
-```bash
+# Client (Mobile App)
+cd client
+expo start
+
+# Admin Dashboard
 cd admin
 npm run dev
 ```
 
-3. Start the mobile app:
-```bash
-cd client
-expo start
-```
-
-## 📱 Mobile App Features
-- Onboarding screens
-- User authentication (Login/Signup)
-- Issue reporting with image upload
-- Location selection
-- Real-time status updates
-- Push notifications
-- Profile management
-- Theme customization
-
-## 💻 Admin Panel Features
-- Issue management
-- User management
-- Status updates
-- Analytics dashboard
-- Real-time notifications
-- Issue verification system
-
-## 🔒 Security Features
-- JWT authentication
-- Password hashing
-- Protected routes
-- Input validation
-- File upload restrictions
-- Rate limiting
-
-## 📡 Real-time Features
-- Live issue updates
-- Socket connections
-- Status changes
-- New issue alerts
-
-## 📝 License
-MIT License - feel free to use this project for your own purposes.
-
-## 🤝 Contributing
-Contributions, issues, and feature requests are welcome!
-
-## 🙏 Acknowledgments
-- Expo team for the amazing mobile development platform
-- Material-UI team for the beautiful components
-- MongoDB team for the reliable database
-- All contributors and testers
+## 📝 Project Structure
